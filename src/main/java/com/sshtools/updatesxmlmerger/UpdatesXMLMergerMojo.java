@@ -52,14 +52,14 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 						if (!Objects.equals(getBaseUrl(doc), getBaseUrl(newDoc))) {
 							throw new IOException("baseUrl differs between two inputs.");
 						} else {
-							var els = newDoc.getElementsByTagName("<entry>");
+							var els = newDoc.getElementsByTagName("entry");
 							for (int i = 0; i < els.getLength(); i++) {
 								var el = els.item(i);
 								var id = getTargetMediaFileId(el);
 
 								var existing = findTargetMediaFileId(doc, id);
 								if (existing == null) {
-									doc.appendChild(el);
+									doc.getDocumentElement().appendChild(doc.adoptNode(el.cloneNode(true)));
 									getLog().info(MessageFormat.format(
 											"Merging media file {0} (with ID of {1}) from {2}", getAttrVal(el, "fileName"), id, file));
 								} else
