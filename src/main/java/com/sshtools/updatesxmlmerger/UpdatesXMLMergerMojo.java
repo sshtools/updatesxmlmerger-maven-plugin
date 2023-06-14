@@ -34,15 +34,15 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 	/**
 	 * Location of the file.
 	 */
-	@Parameter(property = "input", required = true)
-	private File[] input;
+	@Parameter(property = "inputs", required = true)
+	private File[] inputs;
 
 	@Override
 	public void execute() throws MojoExecutionException {
 		Document doc = null;
 
 		try {
-			for (var file : input) {
+			for (var file : inputs) {
 				try (var in = Files.newInputStream(file.toPath())) {
 					var src = new InputSource(in);
 					var newDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(src);
