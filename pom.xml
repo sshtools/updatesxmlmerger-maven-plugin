@@ -221,4 +221,5 @@
 			</build>
 		</profile>
 	</profiles>
+	<packaging>maven-plugin</packaging>
 </project>
