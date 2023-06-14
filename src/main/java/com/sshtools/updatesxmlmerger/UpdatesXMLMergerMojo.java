@@ -60,8 +60,10 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 								var existing = findTargetMediaFileId(doc, id);
 								if (existing == null) {
 									doc.appendChild(el);
-								} else
 									getLog().info(MessageFormat.format(
+											"Merging media file {0} (with ID of {1}) from {2}", getAttrVal(el, "fileName"), id, file));
+								} else
+									getLog().debug(MessageFormat.format(
 											"Skipping media file {0} (with ID of {1}) because it already exists",
 											getAttrVal(el, "fileName"), id));
 							}
@@ -87,6 +89,9 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 			try (var out = Files.newOutputStream(output.toPath())) {
 				transformer.transform(new DOMSource(doc), new StreamResult(out));
 			}
+
+			getLog().info(MessageFormat.format(
+					"Written new updates.xml content to {0}", output));
 		} catch (TransformerException | IOException ioe) {
 			throw new MojoExecutionException("XML transform and write failed.", ioe);
 		}
