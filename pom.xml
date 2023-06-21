@@ -21,7 +21,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sshtools</groupId>
 	<artifactId>updatesxmlmerger-maven-plugin</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>Updates XML Merger - Merge the Install4J updates.xml file from several
 		builds into a single file.</name>
 	<properties>
@@ -36,7 +36,7 @@
 			<email>brett@logonbox.com</email>
 		</developer>
 	</developers>
-	<url>https://github.com/sshtools/sequins</url>
+	<url>https://github.com/sshtools/updatesxmlmerger-maven-plugin</url>
 	<organization>
 		<name>JAdaptive</name>
 		<url>https://jadaptive.com</url>
@@ -78,8 +78,8 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>https://github.com/sshtools/sequins</url>
-		<connection>https://github.com/sshtools/updatesxmlmerger.git</connection>
+		<url>https://github.com/sshtools/updatesxmlmerger-maven-plugin</url>
+		<connection>https://github.com/sshtools/updatesxmlmerger-maven-plugin.git</connection>
 	</scm>
 	<build>
 		<pluginManagement>
