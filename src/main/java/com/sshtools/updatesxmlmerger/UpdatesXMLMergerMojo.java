@@ -16,7 +16,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.w3c.dom.Document;
@@ -32,7 +31,7 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project.build.directory}/media/updates.xml", property = "updatesxml.output")
 	private File output;
 	
-	@Parameter(defaultValue = "true", property = "updatesxml.failIfDirMissing")
+	@Parameter(defaultValue = "true", property = "\"updatesxml.failIfDirMissing")
 	private boolean failIfDirMissing = true;
 
 	/**
@@ -95,6 +94,9 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
+			if(output.getParentFile() != null && !output.getParentFile().exists())
+				output.getParentFile().mkdirs();
+			
 			try (var out = Files.newOutputStream(output.toPath())) {
 				transformer.transform(new DOMSource(doc), new StreamResult(out));
 			}
@@ -102,7 +104,7 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 			getLog().info(MessageFormat.format(
 					"Written new updates.xml content to {0}", output));
 		} catch (TransformerException | IOException ioe) {
-			throw new MojoExecutionException("XML transform and write failed.", ioe);
+			throw new MojoExecutionException("XML transform and write failed. " + ioe.getMessage(), ioe);
 		}
 	}
 
