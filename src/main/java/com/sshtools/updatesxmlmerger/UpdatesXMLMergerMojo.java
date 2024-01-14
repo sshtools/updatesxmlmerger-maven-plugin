@@ -31,7 +31,7 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project.build.directory}/media/updates.xml", property = "updatesxml.output")
 	private File output;
 	
-	@Parameter(defaultValue = "true", property = "\"updatesxml.failIfDirMissing")
+	@Parameter(defaultValue = "true", property = "updatesxml.failIfDirMissing")
 	private boolean failIfDirMissing = true;
 
 	/**
