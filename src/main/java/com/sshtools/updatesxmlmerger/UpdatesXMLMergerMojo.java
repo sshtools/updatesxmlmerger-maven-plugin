@@ -16,6 +16,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.w3c.dom.Document;
@@ -30,6 +31,9 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "${project.build.directory}/media/updates.xml", property = "output")
 	private File output;
+	
+	@Parameter(defaultValue = "true", property = "failIfDirMissing")
+	private boolean failIfDirMissing = true;
 
 	/**
 	 * Location of the file.
@@ -43,6 +47,11 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 
 		try {
 			for (var file : inputs) {
+				if(!failIfDirMissing && !file.exists()) {
+					getLog().warn("Skipping missing update file " + file);
+					continue;
+				}
+				
 				try (var in = Files.newInputStream(file.toPath())) {
 					var src = new InputSource(in);
 					var newDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(src);

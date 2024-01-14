@@ -21,7 +21,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sshtools</groupId>
 	<artifactId>updatesxmlmerger-maven-plugin</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.9.0</version>
 	<name>Updates XML Merger - Merge the Install4J updates.xml file from several
 		builds into a single file.</name>
 	<properties>
