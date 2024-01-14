@@ -29,16 +29,16 @@ public class UpdatesXMLMergerMojo extends AbstractMojo {
 	/**
 	 * Location of output file.
 	 */
-	@Parameter(defaultValue = "${project.build.directory}/media/updates.xml", property = "output")
+	@Parameter(defaultValue = "${project.build.directory}/media/updates.xml", property = "updatesxml.output")
 	private File output;
 	
-	@Parameter(defaultValue = "true", property = "failIfDirMissing")
+	@Parameter(defaultValue = "true", property = "updatesxml.failIfDirMissing")
 	private boolean failIfDirMissing = true;
 
 	/**
 	 * Location of the file.
 	 */
-	@Parameter(property = "inputs", required = true)
+	@Parameter(property = "updatesxml.inputs", required = true)
 	private File[] inputs;
 
 	@Override
